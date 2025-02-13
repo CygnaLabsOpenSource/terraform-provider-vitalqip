@@ -83,7 +83,8 @@ type CaaHttpRequestor struct {
 }
 
 type CAAConnector interface {
-	CreateObject(obj cc.IpamObject, ref string) (id string, err error)
+	CreateObject(obj cc.IpamObject, ref string) (refRes string, err error)
+	CreateObjectWithResponse(obj cc.IpamObject, res interface{}, ref string) (err error)
 	GetObject(obj cc.IpamObject, ref string, res interface{}, query *cc.QueryParams) error
 	DeleteObject(obj cc.IpamObject, ref string, query *cc.QueryParams) (refRes string, err error)
 	UpdateObject(obj cc.IpamObject, ref string) (refRes string, err error)
@@ -149,6 +150,8 @@ func (whr *CaaHttpRequestor) SendRequest(req *http.Request) (res []byte, err err
 	if err != nil {
 		return
 	} else if !(resp.StatusCode == http.StatusOK ||
+		(resp.StatusCode == http.StatusNoContent &&
+			req.Method == RequestType(DELETE).toMethod()) ||
 		(resp.StatusCode == http.StatusCreated &&
 			req.Method == RequestType(CREATE).toMethod())) {
 		err := getHTTPResponseError(resp)
@@ -242,12 +245,6 @@ func (c *Connector) makeRequest(t RequestType, obj cc.IpamObject, ref string, qu
 	req, err = c.RequestBuilder.BuildRequest(t, obj, ref, query)
 	res, err = c.Requestor.SendRequest(req)
 
-	// tries twice ...
-	if err != nil {
-		req, err = c.RequestBuilder.BuildRequest(t, obj, ref, query)
-		res, err = c.Requestor.SendRequest(req)
-	}
-
 	return
 }
 
@@ -275,7 +272,7 @@ func NewConnector(hostConfig HostConfig, transportConfig TransportConfig,
 /* Just the ID is produced as output
  * then TF getSubnet should call getSubnetById to retrieve it at the end of the create execution to return the block information
  */
-func (c *Connector) CreateObject(obj cc.IpamObject, ref string) (id string, err error) {
+func (c *Connector) CreateObject(obj cc.IpamObject, ref string) (refRes string, err error) {
 	query := cc.NewQueryParams(nil)
 	resp, err := c.makeRequest(CREATE, obj, ref, query)
 	if err != nil || len(resp) == 0 {
@@ -291,10 +288,27 @@ func (c *Connector) CreateObject(obj cc.IpamObject, ref string) (id string, err 
 	}
 	b := []byte(s)
 
-	err = json.Unmarshal(b, &id)
+	err = json.Unmarshal(b, &refRes)
 	if err != nil {
 		log.Printf("CreateObject Cannot unmarshall '%s', err: '%s'\n", string(resp), err)
 		return
+	}
+
+	return
+}
+
+func (c *Connector) CreateObjectWithResponse(obj cc.IpamObject, res interface{}, ref string) (err error) {
+	query := cc.NewQueryParams(nil)
+	resp, err := c.makeRequest(CREATE, obj, ref, query)
+	if err != nil || len(resp) == 0 {
+		log.Printf("CreateObject request error: '%s'\n", err)
+		return
+	}
+
+	err = json.Unmarshal(resp, res)
+	if err != nil {
+		log.Printf("CreateObject Cannot unmarshall '%s', err: '%s'\n", string(resp), err)
+		return err
 	}
 
 	return
