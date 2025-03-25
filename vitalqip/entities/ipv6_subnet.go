@@ -18,7 +18,7 @@ type IPv6Subnet struct {
 	SubnetName         string `json:"subnetName,omitempty"`
 	CreateSubnet       string `json:"createSubnet,omitempty"`
 	AlgorithmType      string `json:"algorithmType,omitempty"`
-	CreateReverseZone  bool   `json:"createReverseZone,omitempty"`
+	CreateReverseZone  bool   `json:"createReverseZone"`
 }
 
 func (s IPv6Subnet) String() string {

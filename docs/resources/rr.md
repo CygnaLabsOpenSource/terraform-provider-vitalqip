@@ -28,7 +28,7 @@ The following list describes the parameters you can define in the Resource Recor
   * IDSN: Integrated Services Digital Network
   * SRV: Server Resource Record
   * X25: PSDN (Public Switched Data Network) address
-  * TXT_DKIM: Test DKIM
+  * TXT_DKIM: Text DKIM
   * CAA: Certification Authority Authorization
   * TLSA: TLS Authentication
   * NAPTR: Naming Authority Pointer

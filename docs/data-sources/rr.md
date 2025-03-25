@@ -24,7 +24,7 @@ Use the `vitalqip_rr` data source to retrieve information for a Resource Record 
   * IDSN: Integrated Services Digital Network
   * SRV: Server Resource Record
   * X25: PSDN (Public Switched Data Network) address
-  * TXT_DKIM: Test DKIM
+  * TXT_DKIM: Text DKIM
   * CAA: Certification Authority Authorization
   * TLSA: TLS Authentication
   * NAPTR: Naming Authority Pointer
