@@ -23,7 +23,7 @@ type IPv6Address struct {
 	NodeName       string `json:"nodeName,omitempty"`
 	UniqueID       string `json:"uniqueId,omitempty"`
 	DUID           string `json:"duid,omitempty"`
-	UseMACAddress  bool   `json:"useMACAddress,omitempty"`
+	UseMACAddress  bool   `json:"useMACAddress"`
 	MACAddress     string `json:"macAddress,omitempty"`
 	ObjectAddr     string `json:"objectAddr,omitempty"`
 	AddressVersion int    `json:"addressVersion,omitempty"`

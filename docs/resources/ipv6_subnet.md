@@ -12,7 +12,7 @@ The following list describes the parameters you can define in the resource block
 * `block_address` - `string`: **required**, IPv6 address of block.
 * `block_prefix_length` - `int`: **required**, Prefix length of block.
 * `create_reverse_zone` - `boolean`: **required**, Create Reverse Zone.
-* `subnet_name` - `string`: **optional**, Name of subnet.
+* `subnet_name` - `string`: **required**, Name of subnet.
 * `pool_name` - `string`: **optional**, Name of pool.
 * `block_name` - `string`: **optional**, Name of block.
 
