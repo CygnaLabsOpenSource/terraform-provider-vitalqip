@@ -15,15 +15,15 @@ The following list describes the parameters you can define in the Zone of the re
 * `negative_cache_ttl` - `int`: **required**, DNS negative cache TTL.
 * `refresh_time` - `int`: **required**, DNS refresh time.
 * `retry_time` - `int`: **required**, DNS retry time.
-* `parent_address` - `string`: **optional**, Parent address of the splitted reverse zone.
+* `parent_address` - `string`: **optional**, Parent address of the split reverse zone.
 * `network_address` - `string`: **optional**, Network address of the reverse zone.
 * `postfix_zone_extension` - `string`: **optional**, DNS postfix extension.
 * `prefix_zone_extension` - `string`: **optional**, DNS prefix extension.
 * `config_private_zone` - `boolean`: **optional**, Config private zone.
 * `dns_servers` - `set`: **optional**, List of DNS servers.
     * `name` - `string`: **optional**, Name of DNS Server.
-    * `role` - `string`: **optional**, Primary/Secondary DNS Server: With P is for Primary and S is for Secondary
-    * `secure_update` - `boolean`: **optional**, true is turn on the flag of sending secure update false is not.
+    * `role` - `string`: **optional**, DNS Server Role. Values: P for Primary or S for Secondary.
+    * `secure_update` - `boolean`: **optional**, Send Secure Updates. Values: true or false.
 * `udas` - `set`: **optional**, List of UDAs.
     * `name` - `string`: **optional**, Name of the UDA.
     * `value` - `string`: **optional**, Value of the UDA.
