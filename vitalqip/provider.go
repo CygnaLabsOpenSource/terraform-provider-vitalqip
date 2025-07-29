@@ -63,6 +63,7 @@ func Provider() *schema.Provider {
 			"vitalqip_ipv6_address": resourceIPv6Address(),
 			"vitalqip_ipv6_range":   resourceIPv6Range(),
 			"vitalqip_rr":           resourceRR(),
+			"vitalqip_zone":         resourceZone(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
 			"vitalqip_ipv4_subnet":  dataSourceIPv4Subnet(),
@@ -71,6 +72,7 @@ func Provider() *schema.Provider {
 			"vitalqip_ipv6_address": dataSourceIPv6Address(),
 			"vitalqip_ipv6_range":   dataSourceIPv6Range(),
 			"vitalqip_rr":           dataSourceRR(),
+			"vitalqip_zone":         dataSourceZone(),
 		},
 		ConfigureContextFunc: providerConfigure,
 	}
