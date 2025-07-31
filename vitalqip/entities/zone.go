@@ -114,3 +114,9 @@ func NewZone(sb Zone) *Zone {
 	res.objectType = "zone"
 	return &res
 }
+
+type ZoneResponse struct {
+	PassNumber       int      `json:"passNumber,omitempty"`
+	FailedNumber     int      `json:"failedNumber,omitempty"`
+	ErrorDetailsList []string `json:"errorDetailsList,omitempty"`
+}

@@ -157,14 +157,14 @@ func dataSourceZone() *schema.Resource {
 				Type:        schema.TypeSet,
 				Optional:    true,
 				Computed:    true,
-				Description: "List of groups UDA.",
+				Description: "List of UDA groups.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							Description: "Name of the group.",
+							Description: "Name of the UDA group.",
 						},
 						"udas": {
 							Type:        schema.TypeSet,
