@@ -23,8 +23,8 @@ Use the `vitalqip_zone` data source to retrieve information for a Zone managed b
 * `udas` - `set`: **optional**, List of UDAs.
     * `name` - `string`: **optional**, Name of the UDA.
     * `value` - `string`: **optional**, Value of the UDA.
-* `groups` - `set`: **optional**, List of groups UDA.
-    * `name` - `string`: **optional**, Name of the group.
+* `groups` - `set`: **optional**, List of UDA groups.
+    * `name` - `string`: **optional**, Name of the UDA group.
     * `udas` - `set`: **optional**, List of UDAs.
         * `name` - `string`: **optional**, Name of the UDA.
         * `value` - `string`: **optional**, Value of the UDA.

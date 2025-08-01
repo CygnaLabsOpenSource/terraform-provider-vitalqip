@@ -1,6 +1,8 @@
 package utils
 
 import (
+	"encoding/json"
+	"fmt"
 	en "terraform-provider-vitalqip/vitalqip/entities"
 )
 
@@ -30,9 +32,21 @@ func (objMgr *ObjectManager) DeleteZone(query map[string]string) error {
 
 func (objMgr *ObjectManager) UpdateZone(zone *en.ZoneUpdate) error {
 
-	_, err := objMgr.connector.UpdateObject(zone, "qipmodifyzone")
+	jsonString, err := objMgr.connector.UpdateObject(zone, "qipmodifyzone")
 	if err != nil {
 		return err
 	}
+
+	var zoneResponse en.ZoneResponse
+
+	errParseJson := json.Unmarshal([]byte(jsonString), &zoneResponse)
+	if errParseJson != nil {
+		return errParseJson
+	}
+
+	if zoneResponse.FailedNumber == 1 && len(zoneResponse.ErrorDetailsList) > 0 {
+		return fmt.Errorf(zoneResponse.ErrorDetailsList[0])
+	}
+
 	return nil
 }
